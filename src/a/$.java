@@ -5,17 +5,18 @@ import b.xwriter;
 final public class $ extends a{
 	static final long serialVersionUID=1;
 	public a_ajaxsts ajaxsts;
+	public a pgn_file;{pgn_file.set("1.pgn");}
 	public void to(final xwriter x)throws Throwable{
-		x.el(this);
-		x.style();
-		x.css(ajaxsts,"position:fixed;bottom:0;right:0");
-		x.css("table.chsboard","border:1px solid black");
-		x.css("table.chsboard td","width:45px;height:45px;align:center;vertical-align:middle");
-		x.css("table.chsboard td.wht","background:white");
-		x.css("table.chsboard td.blk","background:#a0a0a0");
-		x.style_();
+		x.style(ajaxsts,"position:fixed;bottom:0;right:0");
 		ajaxsts.to(x);
-		x.pl("baba chess trainer");
+		x.nl(2);
+		
+		x.style(this,"margin:3em;padding:3em;border:1px dotted red;background-color:lightblue").nl();
+		x.el(this);
+		x.p("baba chess trainer on file ");
+		x.style(pgn_file,"border:1px dotted green;padding:.5em");
+		x.inptxt(pgn_file,this);
+		x.pl("");
 		x.el_();
 	}
 }

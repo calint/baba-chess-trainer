@@ -131,7 +131,8 @@ public final class xwriter{
 		return this;
 	}
 	public xwriter table_(){return tage("table");}
-	public xwriter style(){return p("<style scoped>");}
+//	public xwriter style(){return p("<style scoped>");}
+	public xwriter style(){return p("<style>");}
 	public xwriter style_(){return tage("style");}
 	public xwriter td(){return tag("td");}
 	public xwriter td(final String cls){return td(cls,"");}
@@ -273,12 +274,12 @@ public final class xwriter{
 //	public xwriter el(){return p("<span>");}
 	public xwriter el(final String style){return p("<div style=\"display:inline;").p(style).p("\">");}
 //	public xwriter el(final String style){return p("<span style=\"").p(style).p("\">");}
-	public xwriter el(final a e){return p("<div style=display:inline id=").p(e.id()).p(">");}
-//	public xwriter el(final a e){return p("<span id=").p(e.id()).p(">");}
+//	public xwriter el(final a e){return p("<div style=display:inline id=").p(e.id()).p(">");}
+	public xwriter el(final a e){return p("<span id=").p(e.id()).p(" style=display:block>");}
 	public xwriter el(final a e,final String style){return p("<div id=").p(e.id()).p(" style=\"display:inline;").p(style).p("\">");}
 //	public xwriter el(final a e,final String style){return p("<span id=").p(e.id()).p(" style=\"").p(style).p("\">");}
-	public xwriter el_(){return p("</div>");}
-//	public xwriter el_(){return p("</span>");}
+//	public xwriter el_(){return p("</div>");}
+	public xwriter el_(){return p("</span>");}
 	public xwriter r(final a e)throws Throwable{if(e==null)return this;e.to(this);return this;}
 	public xwriter rel(final a e)throws Throwable{
 		if(e==null)return this;
