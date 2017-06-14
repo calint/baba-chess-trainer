@@ -951,7 +951,7 @@ public final class req{
 	private FileChannel upload_channel;
 	private String upload_lastmod_s;
 	private sock sck;
-	final public static String field_path_separator="-";
+	final public static String field_path_separator="_";
 
 	private static Map<String,chdresp>cachef;
 	private static Map<String,chdresp>cacheu;

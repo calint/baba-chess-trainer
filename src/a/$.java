@@ -1,6 +1,7 @@
 package a;
 import b.a;
 import b.a_ajaxsts;
+import b.req;
 import b.xwriter;
 final public class $ extends a{
 	static final long serialVersionUID=1;
@@ -9,14 +10,13 @@ final public class $ extends a{
 	public void to(final xwriter x)throws Throwable{
 		x.style(ajaxsts,"position:fixed;bottom:0;right:0");
 		ajaxsts.to(x);
-		x.nl(2);
-		
-		x.style(this,"margin:3em;padding:3em;border:1px dotted red;background-color:lightblue").nl();
+		x.style(this,"margin:1em;padding:1em;border:1px dotted blue;background-color:#ffe");
 		x.el(this);
 		x.p("baba chess trainer on file ");
 		x.style(pgn_file,"border:1px dotted green;padding:.5em");
 		x.inptxt(pgn_file,this);
-		x.pl("");
+		x.nl(2);
+		req.get().session().path(pgn_file.str()).to(x);
 		x.el_();
 	}
 }
