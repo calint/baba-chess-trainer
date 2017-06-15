@@ -1,19 +1,27 @@
-#!/bin/sh -x
+#!/bin/bash -x
 IP=$1
-NM={$2:=/baba-chess-trainer}
+NM=${2:-baba-chess-trainer}
 GIT=http://github.com/calint/$NM
 
-echo " * init ubuntu 16 lts linode at $IP using $GIT" &&
+echo " * init linode ubuntu 16 lts at $IP using $GIT" &&
+echo "     from $GIT" &&
+
 echo " * copy ssh public key to root" &&
 ssh-copy-id root@$IP &&
+
+echo " * install java 8" &&
+#ssh root@$IP "apt-get update && apt-get -y upgrade && apt-get -y install openjdk-8-jre-headless && git clone $GIT /$NM" &&
+ssh root@$IP apt-get -y install openjdk-8-jre-headless &&
+
+echo " * install app $NM" &&
+ssh root@$IP git clone $GIT /$NM &&
+
+exit
+
 
 echo " * copy systemd service file ba.service to /etc/systemd/system/" &&
 scp ba.service root@$IP:/etc/systemd/system/ &&
 ssh root@$IP systemctl enable ba &&
-
-echo " * update package list" &&
-ssh root@$IP "apt-get update && apt-get -y upgrade && apt-get -y install openjdk-8-jre-headless && git clone $GIT $NM" &&
-
 #echo " * update packages" &&
 #ssh root@$IP apt-get -y upgrade &&
 
