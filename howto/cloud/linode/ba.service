@@ -2,7 +2,7 @@
 Description=baba web server
 
 [Service]
-ExecStart=java -cp /baba-chess-trainer/bin b.b port 80
+ExecStart=/baba-chess-trainer/ba.sh
 
 [Install]
 WantedBy=multi-user.target
