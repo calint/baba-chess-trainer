@@ -1,5 +1,5 @@
 [Unit]
-Description=baba web server
+Description=baba chess trainer
 
 [Service]
 ExecStart=/baba-chess-trainer/ba.sh
