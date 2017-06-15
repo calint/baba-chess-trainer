@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 IP=$1
 NM=${2:-baba-chess-trainer}
 GZIMG=${3:-~/$NM.gz}
