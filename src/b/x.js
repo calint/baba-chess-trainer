@@ -5,6 +5,7 @@ debug_verbose=false;
 
 ui={}
 ui.is_dbg=true;
+ui.path_sep="_";
 ui.axconwait=false;
 $=function(eid){return document.getElementById(eid);}
 $d=function(v){console.log(v);}
@@ -81,7 +82,7 @@ ui.fmt_data_per_second=function(nbytes,ms){
 }
 ui._onreadystatechange=function(){
 //	$d(" * stage "+this.readyState);
-	var elsts=$('-ajaxsts');
+	var elsts=$(ui.path_sep+'ajaxsts');
 	if(elsts){{var e=elsts;
 		if(e._oldbg!=null){
 			e.style.background=e._oldbg;
@@ -92,7 +93,7 @@ ui._onreadystatechange=function(){
 	case 1:// Open
 		if(this._hasopened)break;this._hasopened=true;//? firefox quirkfix1
 		if(debug_verbose)$d(new Date().getTime()-this._t0+" * sending");
-		$s('-ajaxsts','sending '+this._pd.length+' text');
+		$s(ui.path_sep+'ajaxsts','sending '+this._pd.length+' text');
 		this.setRequestHeader('Content-Type','text/plain; charset=utf-8');
 		$d(this._pd);
 		ui.req._jscodeoffset=0;
@@ -101,13 +102,13 @@ ui._onreadystatechange=function(){
 	case 2:// Sent
 		var dt=new Date().getTime()-this._t0;
 //		$d(dt+" * sending done");
-		$s('-ajaxsts','sent '+this._pd.length+' in '+dt+' ms');
+		$s(ui.path_sep+'ajaxsts','sent '+this._pd.length+' in '+dt+' ms');
 		break;
 	case 3:// Receiving
 //		$d(new Date().getTime()-this._t0+" * reply code "+this.status);
 		var s=this.responseText.charAt(this.responseText.length-1);
 		var ms=new Date().getTime()-this._t0;
-		$s('-ajaxsts','received '+ui.fmtsize(this.responseText.length)+' text '+ui.fmt_data_per_second(this.responseText.length,ms));
+		$s(ui.path_sep+'ajaxsts','received '+ui.fmtsize(this.responseText.length)+' text '+ui.fmt_data_per_second(this.responseText.length,ms));
 //		console.log('receiving '+this.responseText.length+' text');
 		if(s!='\n'){
 //			$d(new Date().getTime()-this._t0+" * not eol "+(this.responseText.length-this._jscodeoffset));
@@ -132,7 +133,7 @@ ui._onreadystatechange=function(){
 			eval(jscode);
 		}
 		this._dt=new Date().getTime()-this._t0;//? var _dt
-		$s('-ajaxsts',this._dt+' ms '+ui.fmtsize(this.responseText.length)+' chars '+ui.fmt_data_per_second(this.responseText.length,this._dt));
+		$s(ui.path_sep+'ajaxsts',this._dt+' ms '+ui.fmtsize(this.responseText.length)+' chars '+ui.fmt_data_per_second(this.responseText.length,this._dt));
 		$d("~~~~~~~ ~~~~~~~ ~~~~~~~ ~~~~~~~ ")
 //		$d("done in "+this._dt+" ms");
 		break;		
@@ -168,15 +169,15 @@ $x=function(pb){
 		ui.req=new XMLHttpRequest();
 		ui.req.onreadystatechange=ui._onreadystatechange;
 		ui.req.onerror=function(){
-			var e=$('-ajaxsts');
+			var e=$(ui.path_sep+'ajaxsts');
 			if(!e)return;
 			e._oldbg=e.style.background;
 			e.style.background='#f00';
-			$s('-ajaxsts','connection to server lost. try reload or wait and re-try.');
+			$s(ui.path_sep+'ajaxsts','connection to server lost. try reload or wait and re-try.');
 		}
-		$s('-ajaxsts'," * new connection");
+		$s(ui.path_sep+'ajaxsts'," * new connection");
 	}else{
-		$s('-ajaxsts'," * reusing connection");
+		$s(ui.path_sep+'ajaxsts'," * reusing connection");
 		var count=0;
 		while(ui.req.readyState==1||ui.req.readyState==2||ui.req.readyState==3){
 			if(ui.axconwait){

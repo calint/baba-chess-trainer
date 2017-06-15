@@ -1,0 +1,9 @@
+[Unit]
+Description=baba web server
+
+[Service]
+ExecStart=java -cp /baba-chess-trainer/bin b.b port 80
+
+[Install]
+WantedBy=multi-user.target
+
