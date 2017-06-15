@@ -2,7 +2,7 @@
 Description=baba chess trainer
 
 [Service]
-ExecStart=/baba-chess-trainer/ba.sh
+ExecStart=/baba-chess-trainer/howto/systemd/ba.sh
 
 [Install]
 WantedBy=multi-user.target
